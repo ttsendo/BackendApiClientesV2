@@ -28,12 +28,13 @@ const postCliente = async(req, res) => {
 }
 
 const putCliente = async(req, res) => {
-    const {_id, id, nombre, apellido, email, telefono, password} = req.body //Desesctructurar
+    const { id} = req.query //Desesctructurar
+    const {nombre, apellido, email, telefono, password} = req.body //Desesctructurar
     console.log(req.body)
     let mensaje = ''
     try {
-        const cliente = await Cliente.findOneAndUpdate({_id: _id},
-        {id: id, nombre: nombre, apellido:apellido, email:email, telefono:telefono, password: password})
+        const cliente = await Cliente.findOneAndUpdate({id: id},
+        {nombre: nombre, apellido:apellido, email:email, telefono:telefono, password: password})
         mensaje = 'Actualización exitosa'
     } catch (error) {
         mensaje = error
@@ -42,7 +43,6 @@ const putCliente = async(req, res) => {
         msg:mensaje
     })
 }
-
 const deleteCliente = async(req, res) => {
     const { id} = req.query //Desesctructurar
     let mensaje = ''
